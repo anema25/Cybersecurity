@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Secure Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="{{ url_for('index') }}">← Home</a>
+    <h1>🔒 Secure Login</h1>
+    <p class="muted">This page uses parameterized queries to stop SQLi.</p>
+
+    <form method="post" class="card form">
+      <label>Username
+        <input name="username" type="text" placeholder="username">
+      </label>
+      <label>Password
+        <input name="password" type="password" placeholder="password">
+      </label>
+      <div class="actions">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+
+    {% if msg %}
+    <div class="card result">
+      <strong>Result:</strong>
+      <div>{{ msg }}</div>
+    </div>
+    {% endif %}
+
+    <aside class="card">
+      <small>Secure route uses parameter placeholders (`?`) so payloads are treated as data.</small>
+    </aside>
+  </div>
+</body>
+</html>
