@@ -1,9 +1,41 @@
-<h1>SQL Injection Demo</h1>
-<ul>
-  <li><a href="/vulnerable/login">Vulnerable Login</a></li>
-  <li><a href="/secure/login">Secure Login</a></li>
-  <li><a href="/vulnerable/search">Vulnerable Search</a></li>
-  <li><a href="/secure/search">Secure Search</a></li>
-  <li><a href="/vulnerable/crud">Vulnerable CRUD</a></li>
-  <li><a href="/secure/crud">Secure CRUD</a></li>
-</ul>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SQL Injection Demo — Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SQL Injection Demo</h1>
+      <p class="muted">Local lab — vulnerable endpoints vs secure endpoints</p>
+    </header>
+
+    <nav class="card">
+      <h2>Quick Links</h2>
+      <ul>
+        <li><a href="{{ url_for('login_vulnerable') }}">Vulnerable Login</a></li>
+        <li><a href="{{ url_for('login_secure') }}">Secure Login</a></li>
+        <li><a href="{{ url_for('search_vulnerable') }}">Vulnerable Search</a></li>
+        <li><a href="{{ url_for('search_secure') }}">Secure Search</a></li>
+        <li><a href="{{ url_for('crud_vulnerable') }}">Vulnerable CRUD</a></li>
+        <li><a href="{{ url_for('crud_secure') }}">Secure CRUD</a></li>
+      </ul>
+    </nav>
+
+    <section class="card">
+      <h3>Notes</h3>
+      <ol>
+        <li>This environment is intentionally vulnerable — run locally only.</li>
+        <li>Use the secure endpoints to compare correct mitigation (parameterized queries).</li>
+        <li>To reset the DB re-run your init script.</li>
+      </ol>
+    </section>
+
+    <footer>
+      <small>For learning only — keep offline.</small>
+    </footer>
+  </div>
+</body>
+</html>
