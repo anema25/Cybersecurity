@@ -1,7 +1,38 @@
-<h2>Vulnerable Login</h2>
-<form method="post">
-  Username: <input name="username"><br>
-  Password: <input name="password" type="password"><br>
-  <button type="submit">Login</button>
-</form>
-<p>{{ msg }}</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Vulnerable Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="{{ url_for('index') }}">← Home</a>
+    <h1>⚠️ Vulnerable Login</h1>
+    <p class="muted">This page demonstrates string-concatenation SQL (vulnerable).</p>
+
+    <form method="post" class="card form">
+      <label>Username
+        <input name="username" type="text" placeholder="username">
+      </label>
+      <label>Password
+        <input name="password" type="password" placeholder="password">
+      </label>
+      <div class="actions">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+
+    {% if msg %}
+    <div class="card result">
+      <strong>Result:</strong>
+      <div>{{ msg }}</div>
+    </div>
+    {% endif %}
+
+    <aside class="card">
+      <small>Try payloads like <code>' OR '1'='1</code> on the vulnerable route (local lab only).</small>
+    </aside>
+  </div>
+</body>
+</html>
