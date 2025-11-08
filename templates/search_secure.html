@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Secure Search</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="{{ url_for('index') }}">← Home</a>
+    <h1>🔒 Secure Search</h1>
+    <p class="muted">Search uses parameterized queries — safer.</p>
+
+    <form method="get" class="card form">
+      <label>Search term
+        <input name="q" type="text" placeholder="search term" value="{{ term|default('') }}">
+      </label>
+      <div class="actions">
+        <button type="submit">Search</button>
+      </div>
+    </form>
+
+    <section class="card">
+      <h3>Results</h3>
+      {% if results %}
+        <ul>
+        {% for row in results %}
+          <li>{{ row[0] }}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <p class="muted">No results</p>
+      {% endif %}
+    </section>
+
+    <aside class="card">
+      <small>Parameters prevent injection from changing SQL structure.</small>
+    </aside>
+  </div>
+</body>
+</html>
