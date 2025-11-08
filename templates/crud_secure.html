@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Secure CRUD</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="{{ url_for('index') }}">← Home</a>
+    <h1>🔒 Secure CRUD</h1>
+    <p class="muted">Same forms but server uses parameterized queries to prevent SQLi.</p>
+
+    <section class="card">
+      <h3>Create user (secure)</h3>
+      <form method="post" class="form" action="{{ url_for('crud_secure') }}">
+        <label>Username
+          <input name="username" type="text" placeholder="new username">
+        </label>
+        <label>Password
+          <input name="password" type="password" placeholder="new password">
+        </label>
+        <div class="actions">
+          <button name="add" type="submit">Add user</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h3>Delete user (secure)</h3>
+      <form method="post" class="form" action="{{ url_for('crud_secure') }}">
+        <label>Username to delete
+          <input name="username" type="text" placeholder="username to delete">
+        </label>
+        <div class="actions">
+          <button name="delete" type="submit">Delete</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h3>Update password (secure)</h3>
+      <form action="{{ url_for('update_secure') }}" method="post" class="form">
+        <label>Username
+          <input name="username" type="text" placeholder="username">
+        </label>
+        <label>New password
+          <input name="newpass" type="text" placeholder="new password">
+        </label>
+        <div class="actions">
+          <button type="submit">Update</button>
+        </div>
+      </form>
+    </section>
+
+    {% if msg %}
+    <div class="card result">
+      <strong>Result:</strong> {{ msg }}
+    </div>
+    {% endif %}
+
+    <section class="card">
+      <h3>All users</h3>
+      <ul>
+        {% for u in users %}
+          <li>{{ u['id'] }} — {{ u['username'] }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <aside class="card">
+      <small>The secure version uses `?` placeholders — much safer.</small>
+    </aside>
+  </div>
+</body>
+</html>
